@@ -1,8 +1,5 @@
 <template>
     <div ref="fileManagerContainer" id="filemanager-manager-container" class="p-3"  :class="cssFilemenagerContainer" v-cloak>
-        <div>
-            <font-awesome-icon icon="exclamation-triangle" /> La taille maximum des fichiers est de 5Mo et de 1300px par 1000px
-        </div>
         <nav class="bg-grey-light rounded font-sans w-full m-4">
             <ol class="list-reset flex text-grey-dark" >
                 <li><span class="text-blue font-bold cursor-pointer" @click="goToFolderNav(home)">{{ __('Home') }}</span></li>

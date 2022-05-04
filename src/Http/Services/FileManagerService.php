@@ -2,8 +2,6 @@
 
 namespace Infinety\Filemanager\Http\Services;
 
-use App\Repositories\Kiosk\KioskRepository;
-use App\Repositories\Catalogue\CatalogueRepository;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -114,8 +112,6 @@ class FileManagerService
     public function ajaxGetFilesAndFolders(Request $request)
     {
         $folder = $this->cleanSlashes($request->get('folder'));
-        $kioskRepository = app(KioskRepository::class);
-        $catalogueRepository = app(CatalogueRepository::class);
         $user = Auth::user();
         $kiosks = [];
         $catalogues = [];
@@ -146,34 +142,6 @@ class FileManagerService
 
             if ($folder !== '/') {
                 $parent = $this->generateParent($folder);
-            }
-        }
-
-        if (strtolower($folder) === strtolower(config("filemanager.folder_kiosk_name"))) {
-            foreach ($kioskRepository->getKiosksForUser($user)->toArray() as $kiosk) {
-                array_push($kiosks, $kiosk['name']);
-            }
-
-            $files = $files->filter(function ($value, $key) use ($kiosks) {
-                return in_array($value->name, $kiosks);
-            });
-
-            if ($files->count() === 0) {
-                $parent = (object) [];
-            }
-        }
-
-        if (strtolower($folder) === strtolower(config("filemanager.folder_catalogue_name"))) {
-            foreach ($catalogueRepository->getCataloguesForUser($user)->toArray() as $catalogue) {
-                array_push($catalogues, $catalogue['name']);
-            }
-
-            $files = $files->filter(function ($value, $key) use ($catalogues) {
-                return in_array($value->name, $catalogues);
-            });
-
-            if ($files->count() === 0) {
-                $parent = (object) [];
             }
         }
 
@@ -239,28 +207,7 @@ class FileManagerService
      */
     public function uploadFile($file, $currentFolder, $visibility, $uploadingFolder = false, array $rules = [])
     {
-        $screenSaverFolderName = config('filemanager.folder_screen_saver_name');
-        $sharedScreenSaverFolderName = config('filemanager.folder_shared_screen_saver_name');
-
-        if (preg_match('/^image\//', $file->getMimeType())) {
-            if (strpos($currentFolder, $screenSaverFolderName) !== false) {
-                $pases = Validator::make(['file' => $file], [
-                    'file' => 'max:5000|dimensions:max_width=1600px,max_height=900px',
-                ])->validate();
-            } else if (strpos($currentFolder, $sharedScreenSaverFolderName) !== false) {
-                $pases = Validator::make(['file' => $file], [
-                    'file' => 'max:5000|dimensions:max_width=1600px,max_height=900px',
-                ])->validate();
-            } else {
-                $pases = Validator::make(['file' => $file], [
-                    'file' => 'max:5000|dimensions:max_width=1300px,max_height=1000px',
-                ])->validate();
-            }
-        } else if (preg_match('/^video\//', $file->getMimeType())) {
-            $pases = Validator::make(['file' => $file], [
-                'file' => 'max:10240',
-            ])->validate();
-        } else if (count($rules) > 0) {
+        if (count($rules) > 0) {
             $pases = Validator::make(['file' => $file], [
                 'file' => $rules,
             ])->validate();
