@@ -2,7 +2,7 @@
     <div ref="fileManagerContainer" id="filemanager-manager-container" class="p-3"  :class="cssFilemenagerContainer" v-cloak>
         <nav class="bg-grey-light rounded font-sans w-full m-4">
             <ol class="list-reset flex text-grey-dark" >
-                <li><span class="text-blue font-bold cursor-pointer" @click="goToFolderNav(home)">{{ __('Home') }}</span></li>
+                <li><span class="text-blue font-bold cursor-pointer" @click.stop.prevent="goToFolderNav(home)">{{ __('Home') }}</span></li>
                 <li v-if="pathsLength > 0"><span class="mx-2">/</span></li>
 
                 <template v-for="(folder ,index) in path">
@@ -10,7 +10,7 @@
                         <li  v-bind:key="index"><span href="#" class="text-blue">{{ folder.name }}</span></li>
                     </template>
                     <template v-else>
-                        <li  v-bind:key="index"><span href="#" class="text-blue cursor-pointer font-bold" @click="goToFolder(folder.path)">{{ folder.name }}</span></li>
+                        <li  v-bind:key="index"><span href="#" class="text-blue cursor-pointer font-bold" @click.stop.prevent="goToFolder(folder.path)">{{ folder.name }}</span></li>
                         <li  v-bind:key="index+'_separator'"><span class="mx-2">/</span></li>
                     </template>
                 </template>
@@ -45,7 +45,7 @@
                     <template v-else-if="!files.length">
                         <div class="w-full text-lg text-center my-4">
                             {{ __(`No ${filter || 'files or folders'} in current directory`) }}<br><br>
-                            <button v-if="buttons.delete_folder && !filter" class="btn btn-default btn-danger" @click="removeDirectory">
+                            <button v-if="buttons.delete_folder && !filter" class="btn btn-default btn-danger" @click.stop.prevent="removeDirectory">
                                 {{ __('Remove directory') }}
                             </button>
                         </div>
@@ -56,7 +56,7 @@
                             <template v-if="!files.error">
                                 <template v-if="parent.id">
                                     <div :class="filemanagerClass" :key="parent.id" >
-                                        <Folder v-drag-and-drop:folder :ref="'folder_' + parent.id" :file="parent" :data-key="parent.id" class="h-40 folder-item" :class="{'loading': loadingInfo}" v-on:goToFolderEvent="goToFolder" />
+                                        <Folder v-drag-and-drop:folder :ref="'folder_' + parent.id" :file="parent" :data-key="parent.id" class="h-40 folder-item" :class="{'loading': loadingInfo}" v-on:goToFolderEvent.stop.prevent="goToFolder" />
                                     </div>
                                 </template>
 

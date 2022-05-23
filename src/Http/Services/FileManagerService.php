@@ -144,7 +144,7 @@ class FileManagerService
         }
 
         return response()->json([
-            'files'   => $files->values(),
+            'files'   => $files,
             'path'    => $this->getPaths($folder),
             'filters' => $filters,
             'buttons' => $this->getButtons(),
@@ -475,6 +475,7 @@ class FileManagerService
     private function getAvailableFilters($files)
     {
         $filters = config('filemanager.filters', []);
+        dd($filters);
         if (count($filters) > 0) {
             return collect($filters)->filter(function ($extensions) use ($files) {
                 foreach ($files as $file) {

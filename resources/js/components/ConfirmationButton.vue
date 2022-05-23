@@ -2,7 +2,7 @@
     <button
         :class="[ css, stepsComplete? 'confirmation__button--complete' : '' ]"
         :disabled='stepsComplete'
-        v-on:click='incrementStep()'>
+        v-on:click.stop.prevent='incrementStep()'>
         {{ currentMessage }}
     </button>
 </template>

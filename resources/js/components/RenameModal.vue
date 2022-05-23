@@ -8,7 +8,7 @@
                         <heading :level="2" class="mb-6">
                             {{ __('Rename folder') }}
                         </heading>
-                        <input type="text" class="w-full h-full form-control form-input form-input-bordered py-3" :placeholder="name" v-model="name" autofocus required v-on:keyup.enter="renamePath">
+                        <input type="text" class="w-full h-full form-control form-input form-input-bordered py-3" :placeholder="name" v-model="name" autofocus required v-on:keyup.enter.stop.prevent="renamePath">
                     </template>
 
                     <template v-else>
@@ -17,7 +17,7 @@
                         </heading>
 
                         <div class="flex flex-wrap items-stretch w-full mb-4 relative">
-                            <input type="text" class="flex-shrink flex-grow flex-auto h-full form-control form-input form-input-bordered-left py-3" :placeholder="nameWithoutExtension" v-model="nameWithoutExtension" autofocus required v-on:keyup.enter="renamePath">
+                            <input type="text" class="flex-shrink flex-grow flex-auto h-full form-control form-input form-input-bordered-left py-3" :placeholder="nameWithoutExtension" v-model="nameWithoutExtension" autofocus required v-on:keyup.enter.stop.prevent="renamePath">
                             <div class="flex -mr-px">
                                 <span class="flex items-center leading-normal bg-50 rounded rounded-l-none form-input-bordered-right px-3 whitespace-no-wrap text-grey-dark text-sm">{{ extension }}</span>
                             </div>  
@@ -31,8 +31,8 @@
 
                 <div class="bg-30 px-6 py-3 flex">
                     <div class="ml-auto">
-                        <button type="button" data-testid="cancel-button" @click.prevent="cancelRename" class="btn text-80 font-normal h-9 px-3 mr-3 btn-link">{{ __('Cancel') }}</button>
-                        <button ref="confirmButton" data-testid="confirm-button" :disabled="isSaving" @click.prevent="renamePath" class="btn btn-default btn-primary" :class="{ 'cursor-not-allowed': isSaving, 'opacity-50': isSaving }">
+                        <button type="button" data-testid="cancel-button" @click.stop.prevent="cancelRename" class="btn text-80 font-normal h-9 px-3 mr-3 btn-link">{{ __('Cancel') }}</button>
+                        <button ref="confirmButton" data-testid="confirm-button" :disabled="isSaving" @click.stop.prevent="renamePath" class="btn btn-default btn-primary" :class="{ 'cursor-not-allowed': isSaving, 'opacity-50': isSaving }">
                             <span v-if="isSaving">{{ __('Renaming') }}</span>
                             <span v-else>{{ __('Rename') }}</span>
                         </button>

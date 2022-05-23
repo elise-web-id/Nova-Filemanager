@@ -11,7 +11,7 @@
                     </div>
 
                     <div class="w-1/4 flex flex-wrap justify-end">
-                        <button class="btn buttons-actions" v-on:click="closePreview">X</button>
+                        <button class="btn buttons-actions" v-on:click.stop.prevent="closePreview">X</button>
                     </div>
                 </div>
 
@@ -79,15 +79,15 @@
 
                                 <template v-if="buttons.rename_file">
 
-                                    <svg v-if="!editingName" @click="editName" class="ml-1 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="12" height="12"><path d="M12.3 3.7l4 4L4 20H0v-4L12.3 3.7zm1.4-1.4L16 0l4 4-2.3 2.3-4-4z"/></svg>
+                                    <svg v-if="!editingName" @click.stop.prevent="editName" class="ml-1 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="12" height="12"><path d="M12.3 3.7l4 4L4 20H0v-4L12.3 3.7zm1.4-1.4L16 0l4 4-2.3 2.3-4-4z"/></svg>
 
                                     <template v-if="editingName">
 
                                         <input type="text"  v-bind:ref="'inputName'" :style="{ 'width': nameWidth + 'px' }" v-model="nameNoExtension" class=" value px-1 py-1 rounded-r">
 
-                                        <svg @click="rename" xmlns="http://www.w3.org/2000/svg" class="ml-1 cursor-pointer text-success fill-current" viewBox="0 0 20 20" width="12" height="12"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg>
+                                        <svg @click.stop.prevent="rename" xmlns="http://www.w3.org/2000/svg" class="ml-1 cursor-pointer text-success fill-current" viewBox="0 0 20 20" width="12" height="12"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg>
 
-                                        <svg @click="editingName = !editingName" xmlns="http://www.w3.org/2000/svg" class="ml-1 cursor-pointer" viewBox="0 0 20 20" width="12" height="12"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm1.41-1.41A8 8 0 1 0 15.66 4.34 8 8 0 0 0 4.34 15.66zm9.9-8.49L11.41 10l2.83 2.83-1.41 1.41L10 11.41l-2.83 2.83-1.41-1.41L8.59 10 5.76 7.17l1.41-1.41L10 8.59l2.83-2.83 1.41 1.41z"/></svg>
+                                        <svg @click.stop.prevent="editingName = !editingName" xmlns="http://www.w3.org/2000/svg" class="ml-1 cursor-pointer" viewBox="0 0 20 20" width="12" height="12"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm1.41-1.41A8 8 0 1 0 15.66 4.34 8 8 0 0 0 4.34 15.66zm9.9-8.49L11.41 10l2.83 2.83-1.41 1.41L10 11.41l-2.83 2.83-1.41-1.41L8.59 10 5.76 7.17l1.41-1.41L10 8.59l2.83-2.83 1.41 1.41z"/></svg>
 
                                     </template>
                                 </template>
@@ -155,7 +155,7 @@
 
 
                                 <template v-if="popup">
-                                    <button @click="selectFile" class="btn btn-default btn-primary">
+                                    <button @click.stop.prevent="selectFile" class="btn btn-default btn-primary">
                                         {{ __('Select file') }}
                                     </button>
                                 </template>
