@@ -15,8 +15,8 @@
 
                 <div class="bg-30 px-6 py-3 flex">
                     <div class="ml-auto">
-                        <button dusk="cancel-upload-delete-button" type="button" data-testid="cancel-button" @click.prevent="handleClose" class="btn text-80 font-normal h-9 px-3 mr-3 btn-link">{{__('Cancel')}}</button>
-                        <button ref="confirmButton" data-testid="confirm-button" :disabled="isDeleting" @click.prevent="deleteData" class="btn btn-default btn-danger" :class="{ 'cursor-not-allowed': isDeleting, 'opacity-50': isDeleting }">
+                        <button dusk="cancel-upload-delete-button" type="button" data-testid="cancel-button" @click.stop.prevent="handleClose" class="btn text-80 font-normal h-9 px-3 mr-3 btn-link">{{__('Cancel')}}</button>
+                        <button ref="confirmButton" data-testid="confirm-button" :disabled="isDeleting" @click.stop.prevent="deleteData" class="btn btn-default btn-danger" :class="{ 'cursor-not-allowed': isDeleting, 'opacity-50': isDeleting }">
                             <span v-if="isDeleting">{{ __('Deleting') }}</span>
                             <span v-else>{{ __('Delete') }}</span>
                         </button>

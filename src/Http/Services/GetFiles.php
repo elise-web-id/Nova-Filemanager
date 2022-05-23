@@ -62,6 +62,7 @@ trait GetFiles
             if($attributes->path() === '.gitignore') {
                 return [];
             }
+            $pathinfo = pathinfo(public_path($attributes->path()));
             return [
                 'type' => $attributes->type(),
                 'basename' => basename($attributes->path()),
@@ -70,6 +71,7 @@ trait GetFiles
                 'visibility' => $attributes->visibility(),
                 'lastModified' => $attributes->lastModified(),
                 'mimeType' => $attributes instanceof FileAttributes ? $this->storage->mimeType($attributes->path()) : null,
+                'extension' => $attributes instanceof FileAttributes ? $pathinfo['extension'] : null,
             ];
         });
 
