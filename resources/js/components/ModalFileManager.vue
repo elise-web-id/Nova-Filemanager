@@ -22,7 +22,7 @@
                         <div class="p-3 flex flex-wrap items-center border-b border-50">
                             <div class="w-auto flex flex-wrap justify-start">
                                 <label v-if="buttons.upload_button" class="manual_upload cursor-pointer">
-                                    <div @click.stop.prevent="showUpload = !showUpload" class="btn btn-default btn-primary mr-3">
+                                    <div @click="showUpload = !showUpload" class="btn btn-default btn-primary mr-3">
                                         {{ __('Upload') }}
                                     </div>
                                     <input type="file" multiple="true" @change.stop.prevent="uploadFilesByButton"/>

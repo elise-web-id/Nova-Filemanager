@@ -1,7 +1,7 @@
 <template>
     <transition name='fade'>
         <template v-if="view == 'grid'">
-            <lazy-component @show='handleLazyShow'
+            <lazy-component @show.stop.prevent='handleLazyShow'
                             @click.native='clickStrategy'
                             ref='card'
                             :loading='loading'
@@ -23,14 +23,14 @@
 
                     <div v-else class='flex flex-wrap text-70'>
                         <div class='cursor-pointer' :class="{ ' mr-2' : renamePermission }" v-if='deletePermission'
-                             @click.prevent='deleteFile($event)'>
+                             @click.stop.prevent='deleteFile($event)'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'
                                  aria-labelledby='delete' class='fill-current'>
                                 <path fill-rule='nonzero'
                                       d='M6 4V2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-1v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6H1a1 1 0 1 1 0-2h5zM4 6v12h12V6H4zm8-2V2H8v2h4zM8 8a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V9a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V9a1 1 0 0 1 1-1z'></path>
                             </svg>
                         </div>
-                        <div class='cursor-pointer' v-if='renamePermission' @click.prevent='renameFile($event)'>
+                        <div class='cursor-pointer' v-if='renamePermission' @click.stop.prevent='renameFile($event)'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'
                                  aria-labelledby='edit' class='fill-current'>
                                 <path
@@ -57,7 +57,7 @@
 
         <template v-if="view == 'list'">
 
-            <tr @click='clickStrategy' :loading='loading' v-bind:key='file.id' class='cursor-pointer'>
+            <tr @click.stop.prevent='clickStrategy' :loading='loading' v-bind:key='file.id' class='cursor-pointer'>
                 <td v-if='multiSelecting' class='w-8'>
                     <svg width='20' height='20' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' class='block'>
                         <g v-if='selected'>
@@ -103,14 +103,14 @@
 
                 <td>
                     <div class='flex flex-wrap text-70'>
-                        <div class='cursor-pointer mr-2' v-if='deletePermission' @click.prevent='deleteFile($event)'>
+                        <div class='cursor-pointer mr-2' v-if='deletePermission' @click.stop.prevent='deleteFile($event)'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'
                                  aria-labelledby='delete' class='fill-current'>
                                 <path fill-rule='nonzero'
                                       d='M6 4V2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-1v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6H1a1 1 0 1 1 0-2h5zM4 6v12h12V6H4zm8-2V2H8v2h4zM8 8a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V9a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V9a1 1 0 0 1 1-1z'></path>
                             </svg>
                         </div>
-                        <div class='cursor-pointer' v-if='renamePermission' @click.prevent='renameFile($event)'>
+                        <div class='cursor-pointer' v-if='renamePermission' @click.stop.prevent='renameFile($event)'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'
                                  aria-labelledby='edit' class='fill-current'>
                                 <path

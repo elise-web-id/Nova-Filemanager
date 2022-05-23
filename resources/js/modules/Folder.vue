@@ -1,7 +1,7 @@
 <template>
     <transition name="fade">
         <template v-if="view == 'grid'">
-            <div @click="clickStrategy"
+            <div @click.stop.prevent="clickStrategy"
                  ref="card"
                  :loading="loading"
                  :class="{ 'opacity-50': dragOver }"
@@ -35,10 +35,10 @@
                             <input :checked="selected" type="checkbox">
                         </div>
                         <div v-else class="flex flex-wrap text-70">
-                            <div class="cursor-pointer  mr-2" v-if="deletePermission" @click.prevent="deleteFolder($event)">
+                            <div class="cursor-pointer  mr-2" v-if="deletePermission" @click.stop.prevent="deleteFolder($event)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-labelledby="delete" class="fill-current"><path fill-rule="nonzero" d="M6 4V2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-1v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6H1a1 1 0 1 1 0-2h5zM4 6v12h12V6H4zm8-2V2H8v2h4zM8 8a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V9a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V9a1 1 0 0 1 1-1z"></path></svg>
                             </div>
-                            <div class="cursor-pointer" v-if="renamePermission" @click.prevent="editFolder($event)">
+                            <div class="cursor-pointer" v-if="renamePermission" @click.stop.prevent="editFolder($event)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-labelledby="edit" class="fill-current"><path d="M4.3 10.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H5a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM6 14h2.59l9-9L15 2.41l-9 9V14zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4c0-1.1.9-2 2-2h6a1 1 0 1 1 0 2H2v14h14v-6z"></path></svg>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                 </tr>
             </template>
             <template v-else>
-                <tr @click="clickStrategy" :loading="loading" v-bind:key="file.id"  class="cursor-pointer">
+                <tr @click.stop.prevent="clickStrategy" :loading="loading" v-bind:key="file.id"  class="cursor-pointer">
                     <td v-if="multiSelecting" class="w-8">
                         <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="block">
                             <g v-if="selected"><rect width="20" height="20" rx="4" fill="var(--primary)"></rect> <path fill="#FFF" d="M7.7 9.3c-.23477048-.3130273-.63054226-.46037132-1.01285927-.37708287-.38231702.08328846-.68093514.38190658-.7642236.7642236C5.83962868 10.0694577 5.9869727 10.4652295 6.3 10.7l2 2c.38884351.3811429 1.01115649.3811429 1.4 0l4-4c.3130273-.23477048.4603713-.63054226.3770829-1.01285927-.0832885-.38231702-.3819066-.68093514-.7642236-.7642236C12.9305423 6.83962868 12.5347705 6.9869727 12.3 7.3L9 10.58l-1.3-1.3v.02z"></path></g>
@@ -114,10 +114,10 @@
                     </td>
                     <td>
                         <div class="flex flex-wrap text-70">
-                            <div class="cursor-pointer mr-2" v-if="deletePermission" @click.prevent="deleteFolder($event)">
+                            <div class="cursor-pointer mr-2" v-if="deletePermission" @click.stop.prevent="deleteFolder($event)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-labelledby="delete" class="fill-current"><path fill-rule="nonzero" d="M6 4V2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-1v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6H1a1 1 0 1 1 0-2h5zM4 6v12h12V6H4zm8-2V2H8v2h4zM8 8a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V9a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V9a1 1 0 0 1 1-1z"></path></svg>
                             </div>
-                            <div class="cursor-pointer" v-if="renamePermission" @click.prevent="editFolder($event)">
+                            <div class="cursor-pointer" v-if="renamePermission" @click.stop.prevent="editFolder($event)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-labelledby="edit" class="fill-current"><path d="M4.3 10.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H5a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM6 14h2.59l9-9L15 2.41l-9 9V14zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4c0-1.1.9-2 2-2h6a1 1 0 1 1 0 2H2v14h14v-6z"></path></svg>
                             </div>
                         </div>
