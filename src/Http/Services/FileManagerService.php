@@ -475,7 +475,6 @@ class FileManagerService
     private function getAvailableFilters($files)
     {
         $filters = config('filemanager.filters', []);
-        dd($filters);
         if (count($filters) > 0) {
             return collect($filters)->filter(function ($extensions) use ($files) {
                 foreach ($files as $file) {
