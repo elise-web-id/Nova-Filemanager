@@ -124,7 +124,7 @@
                                 <div class="flex flex-wrap items-stretch w-full mb-4 relative">
                                     <input type="text" class="flex-shrink flex-grow flex-auto text-xs leading-normal w-px flex-1 border border-70 rounded rounded-r-none px-1 relative" :value="info.url" disabled>
                                     <div class="flex -mr-px">
-                                        <button class="copy flex items-center leading-normal bg-50 rounded rounded-l-none border border-l-0 border-70 px-3 whitespace-no-wrap text-grey-dark text-xs" v-copy="info.url" v-copy:callback="onCopy">{{ __('Copy') }}</button>
+                                        <button class="copy flex items-center leading-normal bg-50 rounded rounded-l-none border border-l-0 border-70 px-3 whitespace-no-wrap text-grey-dark text-xs" v-copy="info.url" v-copy:callback.stop.prevent="onCopy">{{ __('Copy') }}</button>
                                     </div>
                                 </div>
                             </div>
