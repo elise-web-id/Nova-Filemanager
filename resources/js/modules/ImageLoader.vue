@@ -2,7 +2,7 @@
     <transition name='fade'>
         <template v-if="view == 'grid'">
             <lazy-component @show.stop.prevent='handleLazyShow'
-                            @click.native='clickStrategy'
+                            @click.native.stop.prevent='clickStrategy'
                             ref='card'
                             :loading='loading'
                             class='card relative flex flex-wrap justify-center border border-lg border-50 overflow-hidden px-0 py-0 cursor-pointer'
